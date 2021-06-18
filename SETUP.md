@@ -5,7 +5,12 @@ The steps below are should help you get set up on an Ubuntu system.
 ```bash
 # install python 3 and dependencies
 sudo apt update
-sudo apt install build-essential libssl-dev libffi-dev python3 python-dev python3-pip python3-venv
+sudo apt install -y \
+    build-essential \                           # essentials for building
+    libmysqlclient-dev \                        # needed for connecting to a mysql client
+    libssl-dev libffi-dev \                     # handling TLS communication and function calls 
+    python3 python-dev python3-pip python3-venv # all the python goodies
+    upx                                         # needed for pyinstaller
 
 # ensure python 3 is the default python version
 ALIASES="~/.bashrc"
@@ -37,10 +42,12 @@ pre-commit install
 pre-commit run --all-files
 ```
 
+## Testing the install
+
 You can test the install with a curl command:
 
 ```bash
-curl -X POST "http://localhost:8080/log" -d "line=ERROR"
+curl -X GET "http://localhost:8080/show"
 ```
 
 ## Recurring

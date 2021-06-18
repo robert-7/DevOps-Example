@@ -5,3 +5,11 @@ Focuses on enabling telemetry, CI/CD, and high-availability through various DevO
 ## Getting Set Up
 
 Please see [the setup documentation](SETUP.md) regarding this.
+
+## Deploying The App
+
+Simply run:
+
+```bash
+pyinstaller --onefile --distpath /opt/app app.py
+```
