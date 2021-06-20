@@ -1,14 +1,14 @@
-version: '3'
+version: '3.9'
 
 # yaml anchors to remove repeated code for setting up 'clustered services'
 x-mysql-server: &mysql-server
   env_file:
     - mysql-server.env
   image: mysql/mysql-server:8.0.12
-  healthcheck:
-    test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-    timeout: 20s
-    retries: 10
+  # healthcheck:
+  #   test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+  #   timeout: 20s
+  #   retries: 10
 
 x-dbwebapp: &dbwebapp
   env_file:
@@ -81,3 +81,15 @@ services:
     container_name: dbwebapp-3
     ports:
       - "8083:8080"
+
+  nginx:
+    container_name: nginx
+    build:
+      context: nginx/.
+    image: local-nginx
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dbwebapp-1
+      - dbwebapp-2
+      - dbwebapp-3
