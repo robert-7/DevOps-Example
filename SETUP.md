@@ -8,7 +8,7 @@ sudo apt update
 sudo apt install -y \
     build-essential \                           # essentials for building
     libmysqlclient-dev \                        # needed for connecting to a mysql client
-    libssl-dev libffi-dev \                     # handling TLS communication and function calls 
+    libssl-dev libffi-dev \                     # handling TLS communication and function calls
     python3 python-dev python3-pip python3-venv # all the python goodies
     upx                                         # needed for pyinstaller
 
@@ -21,10 +21,6 @@ alias python=python3
 EOF
 source ${ALIASES}
 python --version
-
-# install ruby for markdown linting
-sudo apt install ruby
-sudo gem install mdl
 
 # clone repo
 git clone git@github.com:robert-7/DevOps-Example.git
@@ -40,14 +36,10 @@ pip install -r requirements.txt
 # set up pre-commit so basic linting happens before every commit
 pre-commit install
 pre-commit run --all-files
-```
 
-## Testing the install
-
-You can test the install with a curl command:
-
-```bash
-curl -X GET "http://localhost:8080/show"
+# spinning up the environment requires docker and docker-compose:
+# install docker: https://docs.docker.com/engine/install/ubuntu/
+# install docker-compose: https://phoenixnap.com/kb/install-docker-compose-on-ubuntu-20-04
 ```
 
 ## Recurring
