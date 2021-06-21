@@ -24,6 +24,7 @@ Please see [the deployment documentation](deployment/README.md) regarding this.
 * I would've preferred to use Ansible for this, but I stuck with docker-compose as I saw some boilerplate code I could use for bringing up a MySQL cluster and just rolled with it
   * I would've liked to take this a step further with Terraform or Kubernetes, but I don't know Terraform and I didn't think I'd have time to set up the help charts for deploying to Kubernetes and testing
 * only listens on port 80 (needs to still work on port 443)
+* There containers are brought up incorrectly. Although dependencies are set in the docker-compose file, because we have no healthchecks set up, Docker is assuming my MySQL server containers are finished being spun up when they're not and so the MySQL shell container complains when it can't connect. This requires using a "wait-for" script to properly wait for containers to be set up.
 * I can also clean up the repo to bring more organization
 * the service built with Python is really primitive and doesn't do much. This can be enhanced, but I just need something that tests basic DB connections
 * the Python image is huge and can be simplified by building app as a standalone binary in a builder image and copying it into a minimal docker image
